@@ -1,0 +1,194 @@
+/*Account Manipulation - Abstract class
+
+Yzee bank needs to automate the bank transactions.  There are many accounts, like Savings Account, Current Account, Demat Account and so on.
+
+As start up, they need to automate the Savings Account details. 
+
+You are provided with a public class Customer with private attributes :
+
+                                  int  customerId
+
+                                  String customerName
+
+                                  String emailId
+
+       Appropriate public getters and setters are already written.
+
+Write a public 3 argument constructor with arguments – customerId, customerName and emailId.
+
+Write a public class Account with protected attributes :
+
+                                  int accountNumber
+
+                                  Customer customerObj
+
+                                  double balance
+
+       Uncomment the  public getters and setters provided in the template.
+
+Write a public 3 argument constructor with arguments – accountNumber, customerObj and balance.
+
+Write a public method in Account class as,     
+
+            public boolean withdraw(double amount) – Make this method as abstract.
+
+Write  a public class SavingsAccount with private attribute : 
+
+                                 double minimumBalance
+
+              Uncomment the  public getters and setters provided in the template.
+
+ Make this class SavingsAccount to inherit the Account class.
+
+Write a public 4 argument constructor with arguments – accountNumber, customerObj, balance and minimumBalance.
+
+Implement the  withdraw method  as
+
+     public boolean withdraw(double amount) -  This method should return true if withdraw is successful, else return false.
+
+     In this method, check if
+
+               balance - amount   is greater than the minimum balance.
+
+     If yes, perform withdraw.  Reduce the withdraw amount from the balance and return true.
+
+    If not, return false.
+
+Create a public class Main which has the main method.  Check the correctness of the methods written in these classes.
+
+Note :  All class, methods needs to be declared as public*/
+----------------------------------------------------------------------------------------------------
+
+public class Customer {
+	
+	
+	//Attributes
+	private int  customerId;
+	private String customerName;
+	private String emailId;
+	
+	//Constructor
+	public Customer(int customerId, String customerName, String emailId) {
+		super();
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.emailId = emailId;
+	}
+
+    //Getters and Setters
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getEmailId() {
+		return emailId;
+	}
+
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	
+}
+
+
+
+
+------------------------------------------------------------------------------------------------------
+public abstract class Account {
+    
+    protected int accountNumber;
+    protected Customer customerObj;
+    protected double balance;
+
+	public Account(int accountNumber,Customer customerObj, double balance) {
+    	
+    	this.accountNumber = accountNumber;
+    	this.customerObj = customerObj;
+    	this.balance = balance;
+	}
+
+    //Uncomment the getters and setters after writing the attributes
+    
+    public int getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public Customer getCustomerObj() {
+		return customerObj;
+	}
+
+	public void setCustomerObj(Customer customerObj) {
+		this.customerObj = customerObj;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+    
+    public abstract boolean withdraw(double amount);
+}   
+
+
+------------------------------------------------------------------------------------------------------
+public class SavingsAccount extends Account{
+
+    //Uncomment the getters and setters after writing the attributes
+    private double minimumBalance;
+    
+    public double getMinimumBalance() {
+		return minimumBalance;
+	}
+
+	public void setMinimumBalance(double minimumBalance) {
+		this.minimumBalance = minimumBalance;
+	}
+    public SavingsAccount(int accountNumber,Customer customerObj,double balance,double minimumBalance){
+        super(accountNumber,customerObj,balance);
+        this.minimumBalance = minimumBalance;
+    }
+  
+	public boolean withdraw(double amount){
+	    if(balance > minimumBalance){
+	        if((balance-amount)>minimumBalance){
+	            balance = balance - amount;
+	            return true;
+	        }
+	        else{
+	            return false;
+	        }
+	        
+	    }else{
+	        return false;
+	    }
+	}
+}
+
+    
+
+------------------------------------------------------------------------------------------------------
+public class Main{
+    
+    public static void main(String args[]){
+        
+    }
+}
